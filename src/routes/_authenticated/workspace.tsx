@@ -27,9 +27,11 @@ type AiAnalysis = {
 };
 
 export const Route = createFileRoute("/_authenticated/workspace")({
-  validateSearch: (s: Record<string, unknown>) => ({
-    brief: typeof s["brief"] === "string" ? (s["brief"] as string) : undefined,
-  }),
+  validateSearch: (s: Record<string, unknown>) =>
+    (typeof s["brief"] === "string" ? { brief: s["brief"] as string } : {}) as {
+      brief?: string;
+    },
+
   head: () => ({
     meta: [
       { title: "Drafting Workspace — GenNexus" },
